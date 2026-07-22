@@ -18,7 +18,7 @@ export type Product = {
   createdAt: string;
   /** Present when a product is fulfilled by an external marketplace. */
   externalUrl?: string;
-  source?: "eBay";
+  source?: "eBay" | "DummyJSON";
 };
 
 /** Thrift pieces are one-of-one, so stock is fixed at a single unit. */
