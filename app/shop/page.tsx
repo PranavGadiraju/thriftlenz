@@ -2,7 +2,7 @@ import { Camera } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ShopBrowser } from "@/components/shop/shop-browser";
-import { products } from "@/data/products";
+import { products } from "@/data/live-products";
 import { getBrands, getPriceCeiling, getPriceFloor, getSizes } from "@/lib/catalogue";
 
 export const metadata: Metadata = {
@@ -20,8 +20,8 @@ export default function ShopPage() {
           Everything in the edit
         </h1>
         <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted">
-          {products.length} pieces, photographed as they arrive and listed once. When something sells,
-          it is gone.
+          {products.length} pieces, shown with live clothing photography and listed once. When something
+          sells, it is gone.
         </p>
         <Link
           href="/visual-search"
