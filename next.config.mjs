@@ -7,8 +7,7 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     remotePatterns: [
       { protocol: "https", hostname: "loremflickr.com", pathname: "/**" },
-      { protocol: "https", hostname: "i.ebayimg.com", pathname: "/**" },
-      { protocol: "https", hostname: "thumbs.ebaystatic.com", pathname: "/**" },
+      { protocol: "https", hostname: "cdn.dummyjson.com", pathname: "/**" },
     ],
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
