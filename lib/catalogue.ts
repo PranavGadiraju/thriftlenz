@@ -1,4 +1,4 @@
-import { products } from "@/data/products";
+import { products } from "@/data/live-products";
 import type { Filters, Product, SortOption } from "@/types";
 
 export const SIZE_ORDER = ["S", "M", "L", "XL"];
