@@ -16,6 +16,9 @@ export type Product = {
   images: string[];
   featured: boolean;
   createdAt: string;
+  /** Present when a product is fulfilled by an external marketplace. */
+  externalUrl?: string;
+  source?: "eBay";
 };
 
 /** Thrift pieces are one-of-one, so stock is fixed at a single unit. */
