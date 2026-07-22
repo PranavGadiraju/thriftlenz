@@ -3,28 +3,26 @@ import type { Filters, Product, SortOption } from "@/types";
 
 export const SIZE_ORDER = ["S", "M", "L", "XL"];
 
-export function getProductBySlug(slug: string): Product | undefined {
-  return products.find((product) => product.slug === slug);
+export function getProductBySlug(slug: string, source: Product[] = products): Product | undefined {
+  return source.find((product) => product.slug === slug);
 }
 
-export function getProductById(id: string): Product | undefined {
-  return products.find((product) => product.id === id);
+export function getProductById(id: string, source: Product[] = products): Product | undefined {
+  return source.find((product) => product.id === id);
 }
 
-export function getFeaturedProducts(limit = 12): Product[] {
-  const featured = products.filter((product) => product.featured);
-  const rest = products.filter((product) => !product.featured);
+export function getFeaturedProducts(limit = 12, source: Product[] = products): Product[] {
+  const featured = source.filter((product) => product.featured);
+  const rest = source.filter((product) => !product.featured);
   return [...featured, ...rest].slice(0, limit);
 }
 
-export function getBrands(): string[] {
-  return Array.from(new Set(products.map((product) => product.brand))).sort((a, b) =>
-    a.localeCompare(b),
-  );
+export function getBrands(source: Product[] = products): string[] {
+  return Array.from(new Set(source.map((product) => product.brand))).sort((a, b) => a.localeCompare(b));
 }
 
-export function getSizes(): string[] {
-  return Array.from(new Set(products.map((product) => product.size))).sort((a, b) => {
+export function getSizes(source: Product[] = products): string[] {
+  return Array.from(new Set(source.map((product) => product.size))).sort((a, b) => {
     const indexA = SIZE_ORDER.indexOf(a);
     const indexB = SIZE_ORDER.indexOf(b);
     if (indexA !== -1 && indexB !== -1) return indexA - indexB;
@@ -34,24 +32,18 @@ export function getSizes(): string[] {
   });
 }
 
-export function getPriceCeiling(): number {
-  return Math.max(...products.map((product) => product.price));
+export function getPriceCeiling(source: Product[] = products): number {
+  return source.length ? Math.max(...source.map((product) => product.price)) : 0;
 }
 
-export function getPriceFloor(): number {
-  return Math.min(...products.map((product) => product.price));
+export function getPriceFloor(source: Product[] = products): number {
+  return source.length ? Math.min(...source.map((product) => product.price)) : 0;
 }
 
 function matchesQuery(product: Product, query: string): boolean {
   if (!query.trim()) return true;
-  const haystack = [product.brand, product.name, product.description, product.category]
-    .join(" ")
-    .toLowerCase();
-  return query
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean)
-    .every((term) => haystack.includes(term));
+  const haystack = [product.brand, product.name, product.description, product.category].join(" ").toLowerCase();
+  return query.toLowerCase().split(/\s+/).filter(Boolean).every((term) => haystack.includes(term));
 }
 
 export function applyFilters(source: Product[], filters: Filters): Product[] {
@@ -67,14 +59,9 @@ export function applyFilters(source: Product[], filters: Filters): Product[] {
 export function sortProducts(source: Product[], sort: SortOption): Product[] {
   const list = [...source];
   switch (sort) {
-    case "price-asc":
-      return list.sort((a, b) => a.price - b.price);
-    case "price-desc":
-      return list.sort((a, b) => b.price - a.price);
-    case "newest":
-      return list.sort(
-        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-      );
+    case "price-asc": return list.sort((a, b) => a.price - b.price);
+    case "price-desc": return list.sort((a, b) => b.price - a.price);
+    case "newest": return list.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     default:
       return list.sort((a, b) => {
         if (a.featured !== b.featured) return a.featured ? -1 : 1;
@@ -83,9 +70,8 @@ export function sortProducts(source: Product[], sort: SortOption): Product[] {
   }
 }
 
-/** Similar pieces are ranked by shared brand, category, then size. */
-export function getSimilarProducts(product: Product, limit = 4): Product[] {
-  return products
+export function getSimilarProducts(product: Product, limit = 4, source: Product[] = products): Product[] {
+  return source
     .filter((candidate) => candidate.id !== product.id)
     .map((candidate) => {
       let score = 0;
