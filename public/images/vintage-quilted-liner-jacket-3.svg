@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" preserveAspectRatio="xMidYMid slice" role="img"><rect x="-200" y="-200" width="1400" height="1600" fill="#edebe5"/><g transform="rotate(-7 400 500) scale(0.92) translate(34 44)"><ellipse cx="400" cy="812" rx="188" ry="26" fill="#1C1B18" opacity=".07"/>
+  <path d="M292 262 L360 232 L400 296 L440 232 L508 262 L612 344 L574 606 L502 588 L502 754 Q400 776 298 754 L298 588 L226 606 L188 344 Z" fill="#6E7355"/>
+  <path d="M360 232 L400 296 L336 300 L318 258 Z" fill="#444734" opacity=".42"/>
+  <path d="M440 232 L400 296 L464 300 L482 258 Z" fill="#444734" opacity=".42"/>
+  <path d="M392 296 L408 296 L408 760 L392 760 Z" fill="#444734" opacity=".35"/>
+  <rect x="306" y="520" width="86" height="96" rx="8" fill="#444734" opacity=".2"/>
+  <rect x="408" y="520" width="86" height="96" rx="8" fill="#444734" opacity=".2"/>
+  <path d="M298 726 L502 726 L502 754 Q400 776 298 754 Z" fill="#444734" opacity=".3"/>
+  <path d="M226 606 L298 588 L298 624 L238 642 Z" fill="#444734" opacity=".3"/>
+  <path d="M574 606 L502 588 L502 624 L562 642 Z" fill="#444734" opacity=".3"/>
+</g></svg>

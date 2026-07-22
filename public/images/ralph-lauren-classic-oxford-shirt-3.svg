@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" preserveAspectRatio="xMidYMid slice" role="img"><rect x="-200" y="-200" width="1400" height="1600" fill="#e3e1d9"/><g transform="rotate(-7 400 500) scale(0.92) translate(34 44)"><ellipse cx="400" cy="812" rx="188" ry="26" fill="#1C1B18" opacity=".07"/>
+  <path d="M298 266 L358 238 L400 300 L442 238 L502 266 L596 342 L560 596 L500 580 L500 748 Q400 768 300 748 L300 580 L240 596 L204 342 Z" fill="#B4C6D8"/>
+  <path d="M358 238 L400 300 L344 286 Z" fill="#6f7a85" opacity=".45"/>
+  <path d="M442 238 L400 300 L456 286 Z" fill="#6f7a85" opacity=".45"/>
+  <path d="M386 300 L414 300 L410 752 L390 752 Z" fill="#6f7a85" opacity=".22"/>
+  <g fill="#6f7a85" opacity=".55">
+    <circle cx="400" cy="372" r="6"/><circle cx="400" cy="472" r="6"/>
+    <circle cx="400" cy="572" r="6"/><circle cx="400" cy="672" r="6"/>
+  </g>
+  <path d="M240 596 L300 580 L300 616 L250 632 Z" fill="#6f7a85" opacity=".3"/>
+  <path d="M560 596 L500 580 L500 616 L550 632 Z" fill="#6f7a85" opacity=".3"/>
+  <rect x="316" y="396" width="60" height="72" rx="6" fill="#6f7a85" opacity=".16"/>
+</g></svg>
