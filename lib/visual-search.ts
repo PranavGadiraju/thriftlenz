@@ -1,4 +1,4 @@
-import { products } from "@/data/products";
+import { products } from "@/data/live-products";
 import { colorDistance, describeColor } from "@/lib/color";
 import type { Product } from "@/types";
 
