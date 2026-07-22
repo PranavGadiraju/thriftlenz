@@ -2,16 +2,20 @@ import { Camera } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ShopBrowser } from "@/components/shop/shop-browser";
-import { products } from "@/data/live-products";
 import { getBrands, getPriceCeiling, getPriceFloor, getSizes } from "@/lib/catalogue";
+import { ebayIsConfigured, getMarketplaceProducts } from "@/lib/ebay";
 
 export const metadata: Metadata = {
   title: "Shop",
-  description:
-    "Browse every piece in the current ThriftLenz edit. Filter by brand, size, and price.",
+  description: "Browse the current ThriftLenz edit of live secondhand clothing listings.",
 };
 
-export default function ShopPage() {
+export const revalidate = 900;
+
+export default async function ShopPage() {
+  const products = await getMarketplaceProducts(80);
+  const usingEbay = ebayIsConfigured() && products.some((product) => product.source === "eBay");
+
   return (
     <div className="container py-12 sm:py-16">
       <header className="max-w-2xl">
@@ -20,8 +24,7 @@ export default function ShopPage() {
           Everything in the edit
         </h1>
         <p className="mt-4 text-[0.9375rem] leading-relaxed text-muted">
-          {products.length} pieces, shown with live clothing photography and listed once. When something
-          sells, it is gone.
+          {products.length} {usingEbay ? "active marketplace finds" : "demo pieces"}. {usingEbay ? "Prices and availability come from eBay; selecting a piece opens its original listing." : "Add your eBay credentials in Vercel to load live listings."}
         </p>
         <Link
           href="/visual-search"
@@ -35,10 +38,10 @@ export default function ShopPage() {
       <div className="mt-12">
         <ShopBrowser
           products={products}
-          brands={getBrands()}
-          sizes={getSizes()}
-          priceFloor={getPriceFloor()}
-          priceCeiling={getPriceCeiling()}
+          brands={getBrands(products)}
+          sizes={getSizes(products)}
+          priceFloor={getPriceFloor(products)}
+          priceCeiling={getPriceCeiling(products)}
         />
       </div>
     </div>
