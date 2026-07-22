@@ -1,4 +1,4 @@
-import { products } from "@/data/live-products";
+import { products } from "@/data/products";
 import { colorDistance, describeColor } from "@/lib/color";
 import type { Product } from "@/types";
 
@@ -31,14 +31,12 @@ const WEIGHTS = { color: 0.5, category: 0.28, keyword: 0.14, brand: 0.08 };
 function colorScore(product: Product, colors: string[]): { score: number; distance: number } {
   if (colors.length === 0) return { score: 0.5, distance: Number.POSITIVE_INFINITY };
   const distance = Math.min(...colors.map((color) => colorDistance(color, product.colorHex)));
-  // 0 delta is a perfect match; anything past 70 carries no signal.
   return { score: Math.max(0, 1 - distance / 70), distance };
 }
 
 function keywordScore(product: Product, keywords: string[]): { score: number; hits: string[] } {
   if (keywords.length === 0) return { score: 0, hits: [] };
-  const haystack = `${product.brand} ${product.name} ${product.category} ${product.description}`
-    .toLowerCase();
+  const haystack = `${product.brand} ${product.name} ${product.category} ${product.description}`.toLowerCase();
   const hits = keywords
     .map((keyword) => keyword.trim().toLowerCase())
     .filter((keyword) => keyword.length > 2 && haystack.includes(keyword));
@@ -69,7 +67,7 @@ export function matchProducts(attributes: PhotoAttributes, limit = 8): PhotoMatc
     if (categoryMatch) reasons.push(`Same category: ${product.category.toLowerCase()}`);
     if (brandMatch) reasons.push(`Brand match: ${product.brand}`);
     if (keyword.hits.length > 0) reasons.push(`Matches ${keyword.hits.slice(0, 2).join(", ")}`);
-    if (reasons.length === 0) reasons.push("Loose match on colour and cut");
+    if (reasons.length === 0) reasons.push("Closest available garment in the curated catalogue");
 
     return { product, score, reasons };
   });
